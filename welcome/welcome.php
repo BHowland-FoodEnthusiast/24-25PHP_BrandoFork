@@ -5,8 +5,8 @@ $name = $email = "";
 
 //condition to detect form data and clean it
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $name = $_POST["name"];
-    $email = $_POST["email"];
+    $name = sanitize_input($_POST["name"]);
+    $email = sanitize_input($_POST["email"]);
 }
 
 //function to sanitize
@@ -15,13 +15,15 @@ function sanitize_input($data){
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
+    return $data;
 }
 
 ?>
 
 <div class="col">
     <div class="row">
-        <p>Welcome <?php echo $_POST["name"] ?>, your email address is <?php echo $_POST["email"] ?> </p>
+        <p>Welcome <?php echo $name; ?>,
+            your email address is <?php echo $email; ?> </p>
     </div>
 </div>
 
